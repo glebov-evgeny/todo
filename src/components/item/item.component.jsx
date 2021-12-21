@@ -1,36 +1,34 @@
-import React, {useState} from 'react';
-import {CSSTransition, TransitionGroup } from 'react-transition-group';
-import './item.styles.scss'
-
-
-
+import React, { useState } from "react";
+import "./item.styles.scss";
 
 const Item = (props) => {
-  const nodeRef = React.useRef(null);
-  const {id, title, text, status, handleCheck = Function.prototype} = props;
-  const [isActive, setIsActive] = useState(false);
-  
-  return(
-    <div className={status ? "card__item" : "card__item card__item-done"}>       
+  const {
+    id,
+    title,
+    status,
+    handleStatus = Function.prototype,
+    handleDelete = Function.prototype,
+  } = props;
 
-        <div className="card__item-content">
-          <p className="card__item-title" onClick={() => setIsActive(!isActive)}>{title}</p>
-          <p>{status}</p>
-          <TransitionGroup>
-          {isActive && (
-            <CSSTransition classNames="card__item-text-option" timeout={300} nodeRef={nodeRef}>
-              <p className="card__item-text" ref={nodeRef}>{text}</p>
-            </CSSTransition>
-            )
-          }   
-          </TransitionGroup>
-        </div>
-
-       <div className={status ? 'card__item-checkbox': 'card__item-checkbox card__item-checkbox-active'} onClick={() => handleCheck(id)}></div>
-
+  return (
+    <div
+      className={status ? "card__item" : "card__item card__item--done"}
+      onClick={() => handleStatus(id)}
+    >
+      <div className="card__item-content">
+        <p className="card__item-title">{title}</p>
+        <button className="card__item-delete"  onClick={() => handleDelete(id)}>Удалить</button>
       </div>
-  )
 
-} 
+      <div
+        className={
+          status
+            ? "card__item-checkbox"
+            : "card__item-checkbox card__item-checkbox--done"
+        }
+      ></div>
+    </div>
+  );
+};
 
-export default Item
+export default Item;

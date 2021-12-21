@@ -2,6 +2,8 @@ import { initializeApp } from "firebase/app";
 /* инициализация firebase  */
 
 import Card from "./components/card/card.component";
+import Modal from "./components/modal/modal.component";
+
 
 // eslint-disable-next-line
 const firebase = initializeApp(
@@ -22,6 +24,7 @@ function App() {
         <main className="main">
           <div className="container">
             <Card/>
+            <Modal/>
           </div>                     
         </main>
     </div>

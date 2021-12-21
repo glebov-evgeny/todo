@@ -1,5 +1,6 @@
 import { useState, useEffect} from "react";
-import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query } from "firebase/firestore"
+import { getFirestore, collection, doc, deleteDoc, updateDoc, onSnapshot, query } from "firebase/firestore"
+
 
 import './card.styles.scss'
 
@@ -10,7 +11,6 @@ import add from './img/add.png';
 
 const Card = () => {
   const [items, setItems] = useState([]);
-  const [newItems, setNewItems] = useState([]);
   const db = getFirestore();
 
   /* Получение данных */
@@ -32,16 +32,41 @@ const Card = () => {
       /* добавляю в стэйт */
       setItems(arr);
   });
+
   }, [db])
 
 
-  const handleCheck = (id) => {
+  const handleStatus = (id) => {
     setItems(
+      
       items.map(item => {
         if(item.id === id) {
           item.status = !item.status;
-          // const ref = db.collection(authID).doc(id);
-          // ref.update({ completed: todo.completed })
+
+          const ref = doc(db, "todo", item.id);
+          updateDoc(ref, {
+            status: item.status
+          });
+          return item
+        }
+        return item
+      })
+    )
+  }
+
+  const handleModal = () => {
+    console.log('ааа')
+  }
+
+  const handleDelete = (id) => {
+    setItems(
+      
+      items.map(item => {
+        if(item.id === id) {
+
+        
+          deleteDoc(doc(db, "todo", item.id))
+
           return item
         }
         return item
@@ -55,12 +80,12 @@ const Card = () => {
     <div className="card__block">
       <div className="card__list">
         {items.map((item) => (
-          <Item key={item.id} {...item} handleCheck={handleCheck}/>
+          <Item key={item.id} {...item} handleStatus={handleStatus} handleDelete={handleDelete}/>
         ))}
       </div>
       <div className="card__info"></div>
       </div>
-      <button className='card__add'><img src={add} alt="logo" /></button>
+      <button className='card__add' onClick={() => handleModal()}><img src={add} alt="logo" /></button>
   </div>
   )
 }
