@@ -1,17 +1,115 @@
 .popup{
   width: 100%;
   max-width: 330px;
-  min-height: 540px;
+  min-height: 340px;
   position: fixed;
-  top: 25px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.3);
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, .2);
   transition: all 0.2s ease-in-out;
-  display: none;
+  padding: 35px 25px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+  visibility: hidden;
+  opacity: 0;
+  &.md-show {
+    visibility: visible;
+    opacity: 1;
+    .popup__wrapper{
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  &__wrapper{
+    width: 100%;
+    transition: all 0.3s;
+    transform: translateY(-5%);
+    opacity: 0;
+    
+  }
+  &__close{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+  &__title{
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 120%;
+    text-align: center;
+    color: #fff;
+    margin: 0 auto 35px;
+  }
+  &__input{
+    border: 2px solid #fff;
+    background: #ffffff4d;
+    width: 100%;
+    min-height: 55px;
+    padding: 15px;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    line-height: 110%;
+    &.error{
+      border: 2px solid #e76565;
+      box-shadow: inset 0 0 10px #e76565;
+    }
+    &::placeholder{
+      color: rgb(43, 43, 43);
+    }
+  }
+  &__button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    min-height: 50px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-radius: 5px;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    margin: 20px 0 15px;
+    background: #ff3658;
+    &:hover {
+      box-shadow: 2px 2px 5px #2e2a2b, -2px -2px 5px #d96e89;
+    }
+    &:active {
+      box-shadow: inset 2px 2px 3px #832344, inset -2px -2px 3px #c71212;
+    }
+  }
+}
+
+.md-overlay{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  opacity: 0;
+  background: rgba(20, 2, 0, 0.8);
+  transition: all 0.3s;
+}
+
+.md-show ~ .md-overlay {
+  opacity: 1;
+  visibility: visible;
 }

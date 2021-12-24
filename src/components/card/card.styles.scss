@@ -10,6 +10,9 @@
   box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, .2);
   transition: all 0.2s ease-in-out;
   padding: 25px;
+  &-blur{
+    filter: blur(5px);
+  }
   @media (max-width: 576px) {
     padding: 20px;
   }
@@ -54,9 +57,9 @@
       height: 35px;
       position: absolute;
       top: 50%;
-      left: 50%;
-      opacity: 0;
-      transform: translate(-15%, 25%) rotate(75deg);
+      left: 25%;
+      opacity: 1;
+      transform: translate(-15%, 25%) rotate(0deg);
       transition: .5s;
     }
     &:hover{
@@ -64,7 +67,7 @@
       right: 0;
       img{
         opacity: 1;
-        transform: translate(-5%, 25%) rotate(0deg);
+        transform: translate(-5%, 25%) rotate(180deg);
       }
     }
     @media (max-width: 576px) {
@@ -75,8 +78,8 @@
       img{
         width: 25px;
         height: 25px;
-        top: 40%;
-        left: 40%;
+        top: 35%;
+        left: 25%;
       }
     }
   }

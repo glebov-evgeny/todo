@@ -12,7 +12,7 @@ const Item = (props) => {
 
   return (
     <div
-      className={status ? "card__item" : "card__item card__item--done"}
+      className={status ? "card__item" : "card__item card__item--done"} id={id}
       onClick={() => handleStatus(id)}
     >
       <div className="card__item-content">
