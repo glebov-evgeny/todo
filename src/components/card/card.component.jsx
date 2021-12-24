@@ -21,7 +21,7 @@ const Card = (props) => {
           <Item key={item.id} {...item} handleStatus={handleStatus} handleDelete={handleDelete}/>
         ))}
       </div>
-      <div className="card__info"></div>
+
       </div>
       <button className='card__add' onClick={() => handleModal()}>
         <img src={add} alt="logo" />
